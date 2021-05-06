@@ -383,6 +383,59 @@ while True:
                 auswahl = 0
 ~~~
 
+## Ab 10.5.2021
+
+Es geht los mit einer Kerntechnologie. Hierzu schon das Informationsvideo und im Anschluss die Aufgabenstellung.
+
+<video src="http://gcm.schule/video/playground_level0_einfuehrung_pwm.mp4" controls>
+
+### Aufgabe
+
+Teste den Code aus dem Video. 
+
+~~~ python=
+import RPi.GPIO as GPIO
+
+pin = 18
+frequenz = 50
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(pin, GPIO.OUT)
+pwmObjekt = GPIO.PWM(pin, frequenz)
+pwmObjekt.start(0)
+
+wert = input("Wie stark soll die LED leuchten (0-100)? ")
+tastgrad = int(wert)
+if (tastgrad > 0 and tastgrad < 101):
+  pwmObjekt.ChangeDutyCycle(tastgrad)
+else:
+  print("Gib einen Wert zwischen 0 und 101 ein!")
+input("Wenn Du fertig bist, drücke Enter!")
+
+GPIO.cleanup()
+~~~
+
+Erweitere es um die Funktion, dass die LEDs automatisch gedimmt werden. Dazu musst Du mit einer Schleife den Tastgrad in Schritten erhöhen. Hierzu ein kleines Snippet. Darin fehlen natürlich die Funktionen zur PWM-Steuerung der GPIO-Pins
+
+~~~ python
+import time
+
+tastgrad = 0
+schritte = 5
+
+while tastgrad < 95: # wird bei 94 ein letztes Mal durchlaufen
+    tastgrad = tastgrad + schritte
+    time.sleep(0.2)
+    
+while tastgrad > 5: # wird bei 6 ein letztes Mal durchlaufen
+    tastgrad = tastgrad - schritte
+    time.sleep(0.2)
+~~~
+
+### Abgaben
+
+Die Abgaben erfolgen über die Aufgaben im Lernraum. Es soll dort der Pythoncode hochgeladen werden. Wenn Du ein cooles Video von der eigenen Ampel gemacht hast, kannst Du mir das gern per Mail senden (max. 30MB), damit ich mir das gleich anschauen kann. Alternativ bin ich auch per Signal/Telegram/Discord/Threema erreichbar.
+
 
 
 
