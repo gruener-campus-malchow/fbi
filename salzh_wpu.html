@@ -219,7 +219,7 @@ Ab diesem Kapitel sind die Anfänger- und Amteur-Aufgaben für jeden Pflicht. Di
 **Amateur (Pflicht)**
 
 1. Erstelle ein Foto, wie es im Tutorial beschrieben ist und lade es herunter.
-1. Sende das Foto per Mail an Deinen Lehrer.
+1. Lade das Foto im Lernraum hoch.
 
 **Fortgeschrittene (Freiwillig)**
 
@@ -236,7 +236,7 @@ Leider ist es bei dem Ausbau des Playgrounds zu Verzögerungen gekommen. Hier nu
 **Anfänger (Pflicht)**
 
 1. Logge Dich auf den Pi ein und erstelle ein neues Foto. (Achtung: Nur tagsüber hast Du Licht!)
-1. Beschrifte das Foto mit folgenden Bestandteilen, die zum Playground gehören. Benutzen dafür ein Grafik- oder Officeprogramm. Sende das Foto an Deinen Lehrer.
+1. Beschrifte das Foto mit folgenden Bestandteilen, die zum Playground gehören. Benutzen dafür ein Grafik- oder Officeprogramm. Speichere das Foto im Lernraum.
 
  * Stromverteiler
  * Netzteil Raspberry Pi
@@ -255,7 +255,7 @@ Leider ist es bei dem Ausbau des Playgrounds zu Verzögerungen gekommen. Hier nu
 
 Eine sehr ergiebige Quelle für Code und eine Menge Erklärungen dazu in deutscher Sprache: http://www.netzmafia.de/skripten/hardware/RasPi/kamera/index.html
 
-Sende den Python-Code, den Du dafür verwendet hast an Deinen Lehrer.
+Speichere den Python-Code, den Du dafür verwendet hast, im Lernraum.
 
 **Fortgeschrittene (Freiwillig)**
 
@@ -449,6 +449,58 @@ Die Abgaben erfolgen über die Aufgaben im Lernraum. Es soll dort der Pythoncode
 ### Musterlösung
 
 <video src="http://gcm.schule/video/playground_level0_musterloesung_pwm_01.mp4" controls>
+
+### LBNL
+
+Last But Not Least: https://www.raspberry-pi-geek.de/ausgaben/rpg/2020/04/grundlagen-der-pulsweitenmodulation/ - das hier ist technisch wirklich teifergehend...
+
+## Level1
+
+**Achtung, dieser Teil ist noch stark im Aufbau!**
+
+Level1 wird insgesamt mit Servos ausgestattet. Grundsätzliche Informationen zum Servomotor findest Du z.B. hier: https://www.precifast.de/servomotor-funktion-ansteuern-anschliessen/
+
+Um auf Level1 zu arbeiten, muss man sich erneut um Zugangsdaten bemühen (z.B. indem man die/den Lehrer*in fragt). Wenn man auf Level0 bereits per SSH eingeloggt ist, kann man sich von dort auf Level1 weiter SSHen (also SSH benutzen, um weiter zu kommen…).
+
+### Kontinuierlich drehende Servos
+
+Modellbauservos werden üblicherweise mit 40 Hz bis 50 Hz angesteuert. Interessant ist jedoch vor allem, bei welchem Tastgrad die Servos als analoge Bauteile wie reagieren. Damit sollst Du Dich in der nächsten Aufgabe beschäftigen. 
+
+Ein wenig Theorie zum Thema und Beispielcode ist hier zu finden: https://tutorials-raspberrypi.de/raspberry-pi-servo-motor-steuerung/ . Der dort vorgestellte Code ist allerdings für Steuer-Servos mit denen ein Servo-Horn nach links oder rechts gedreht wird. Der angeschlossene Motor kann allerdings nur langsamer oder schneller mit dem Uhrzeigersinn oder entgegen diesem rotieren. Er ist also weniger für einen Robotergreifarm als für ein Antriebsrad geeignet. Und das ist ein wichtiger Grund, weshalb wir damit anfangen: Wie kann man mit dem Pi einen Motor schneller oder langsamer drehen?
+
+### Servos kontrollieren
+
+~~~
+# Bilbiotheken, die man benötigt
+import RPi.GPIO as GPIO
+
+# GPIO-Pin, an dem der Servo angeschlossen ist
+servoPIN = 18
+# Frequenz des PWM-Signals
+frequenz = 50
+
+# ein paar Einstellungen
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(servoPIN, GPIO.OUT)
+
+# bereite das Signal am jeweiligen  Pin mit der eingestellten Frequenz vor
+pwmSignal = GPIO.PWM(servoPIN, frequenz)
+# starte das Signal mit einer Weite von 0
+pwmSignal.start(0)
+
+try:
+  while True:
+    weite = float(input('Gib die Weite ein: '))
+    print('PWM-Signal mit Weite von '+str(weite))
+    pwmSignal.ChangeDutyCycle(weite)
+
+finally:
+  pwmSignal.stop()
+  GPIO.cleanup()
+  
+~~~
+
+
 
 
 <script>markdeepOptions = {mode:'markdeep', tocStyle:'long', definitionStyle:'long', linkAPIDefinitions: false};</script>
