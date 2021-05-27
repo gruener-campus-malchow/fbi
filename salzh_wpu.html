@@ -462,8 +462,6 @@ Last But Not Least: https://www.raspberry-pi-geek.de/ausgaben/rpg/2020/04/grundl
 
 ## Level1
 
-**Achtung, dieser Teil ist noch stark im Aufbau!**
-
 Level1 wird insgesamt mit Servos ausgestattet. Grundsätzliche Informationen zum Servomotor findest Du z.B. hier: https://www.precifast.de/servomotor-funktion-ansteuern-anschliessen/
 
 Um auf Level1 zu arbeiten, muss man sich erneut um Zugangsdaten bemühen (z.B. indem man die/den Lehrer*in fragt). Wenn man auf Level0 bereits per SSH eingeloggt ist, kann man sich von dort auf Level1 weiter SSHen (also SSH benutzen, um weiter zu kommen…).
@@ -506,8 +504,63 @@ finally:
   
 ~~~
 
+Der Code ist zum Räubern und als Beispiel gedacht. Kommen wir zur Aufgabenstellung:
 
+### Aufgaben
 
+1. Bekomme heraus, bei welchen Tastgraden der Servo im Uhrzeigersinn oder gegen den Uhrzeigersinn läuft. Dabei sollst Du aber auch unterscheiden, ob er jeweils langsam oder schnell ist. Hierfür sollst Du nicht mühsam den Beispielcode mit Werten durchprobieren, sondern ein Programm schreiben. Lade Deinen Code in den Lernraum hoch.
+
+1. Erstelle ein Tabelle (in Markdown) in welcher der Tastgrad dem jeweiligen Motorverhalten gegenüber steht. In den Hilfestellungen findest Du dazu Code zum Räubern.
+
+### Hilfestellungen
+
+Der folgende Code zeigt, wie man einen Wert in fest definierten Schritten (steps) ändert. Das könnte ja der Tastgrad an einem PWM-Output sein...
+
+~~~ python
+
+import time
+
+# hier nehmen wir float...
+start = 0.0
+ende = 50.0
+step = 0.5
+
+while start <= ende:
+    print(start)
+    start = start + step
+    time.sleep(0.5)
+
+~~~
+
+Folgende Tabelle soll als Orientierung dienen:
+
+| Tastgrad       | Verhalten                         |
+| -------------- | --------------------------------- |
+| hier eintragen | Start Rotation mit Uhrzeigersinn (MUS) |
+|                | langsam Rotation MUS |
+|                | mittelschnell Rotation MUS |
+|                | schnell Rotation MUS |
+| hier eintragen | Start Rotation gegen Uhrzeigersinn (GUS) |
+|                | langsam Rotation GUS |
+|                | mittelschnell Rotation GUS |
+|                | schnell Rotation GUS |
+
+Und das ist der Makrdown-Code für die Tabelle:
+
+~~~ md
+
+| Tastgrad       | Verhalten                         |
+| -------------- | --------------------------------- |
+| hier eintragen | Start Rotation mit Uhrzeigersinn (MUS) |
+|                | langsam Rotation MUS |
+|                | mittelschnell Rotation MUS |
+|                | schnell Rotation MUS |
+| hier eintragen | Start Rotation gegen Uhrzeigersinn (GUS) |
+|                | langsam Rotation GUS |
+|                | mittelschnell Rotation GUS |
+|                | schnell Rotation GUS |
+
+~~~
 
 <script>markdeepOptions = {mode:'markdeep', tocStyle:'long', definitionStyle:'long', linkAPIDefinitions: false};</script>
 <link rel="stylesheet" href="campus.css">
