@@ -403,7 +403,7 @@ Es geht los mit einer Kerntechnologie. Hierzu schon das Informationsvideo und im
 
 Teste den Code aus dem Video. 
 
-~~~ python=
+~~~ python
 import RPi.GPIO as GPIO
 
 pin = 18
@@ -450,6 +450,12 @@ Die Abgaben erfolgen über die Aufgaben im Lernraum. Es soll dort der Pythoncode
 
 <video src="http://gcm.schule/video/playground_level0_musterloesung_pwm_01.mp4" controls>
 
+## Challenge
+
+Emil schlägt folgende Challenge vor:
+
+Stelle einen Code zusammen der auf einer Frequenz von 500 Hertz läuft. Man soll die LED je nach Tasteneingabe zwischen 1 und 100 dimmen können, wobei die LED animiert entweder heller oder dunkler wird. Das bedeutet, wenn der Wert zunächst auf 30 steht und durch die Eingabe auf 90 anwachsen soll, muss der Tastgrad über einen gewissen Zeitraum von 30 in kleinen Schritten bis 90 erhöht werden.
+
 ### LBNL
 
 Last But Not Least: https://www.raspberry-pi-geek.de/ausgaben/rpg/2020/04/grundlagen-der-pulsweitenmodulation/ - das hier ist technisch wirklich teifergehend...
@@ -470,7 +476,7 @@ Ein wenig Theorie zum Thema und Beispielcode ist hier zu finden: https://tutoria
 
 ### Servos kontrollieren
 
-~~~
+~~~ python
 # Bilbiotheken, die man benötigt
 import RPi.GPIO as GPIO
 
